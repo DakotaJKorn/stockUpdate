@@ -15,9 +15,15 @@ router.get('/updateOptions', updateStocksController.updateOptions)
 router.get('/serverStatus', updateStocksController.checkServerStatus)
 
 // access all of the stocks in the database
-router.get('/stopServer', updateStocksController.serverAsleep)
+router.post('/stopServer', updateStocksController.serverAsleep)
 
 // access all of the stocks in the database
-router.get('/startServer', updateStocksController.serverAwake)
+router.post('/startServer', updateStocksController.serverAwake)
+
+// access all of the stocks in the database
+router.delete('/deleteStock/:symbol', updateStocksController.deleteStockFromStocks)
+
+// access all of the stocks in the database
+router.post('/addStock/:symbol', updateStocksController.addStockToStocks)
 
 module.exports = router

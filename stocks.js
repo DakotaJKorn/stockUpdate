@@ -352,4 +352,24 @@ stocks = [
     {"stock_symbol": "NXPI"},
 ]
 
+let addStock = (symbol) => {
+    var index = array.indexOf({"stock_symbol": symbol});
+    if (index !== -1) 
+        this.stocks.push({"stock_symbol": symbol})
+        console.log(symbol + " added!")
+}
+
+let deleteStock = (symbol) => {
+    var index = array.indexOf({"stock_symbol": symbol});
+    if (index !== -1) 
+      array.splice(index, 1);
+    
+    console.log(symbol + " deleted!")
+}
+
 module.exports.stocks = stocks; 
+module.exports.addStock = addStock; 
+module.exports.deleteStock = deleteStock; 
+
+
+//Create database and pull stocks from

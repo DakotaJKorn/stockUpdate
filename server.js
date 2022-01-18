@@ -2,10 +2,6 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3224
 
-
-
-
-
 app.use(express.json())
 
 

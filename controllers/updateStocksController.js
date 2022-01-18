@@ -1,5 +1,5 @@
 let requestify = require('requestify');
-let stocks = require('../stocks').stocks
+let stocks = require('../stocks').stocks;
 
 const docClient = require('../config/dynamoDBConfig').docClient;
 const db = require('../models/index')
@@ -12,12 +12,11 @@ let updateStockInformation = false
 const intervalTime = 1000 * 60
 let updateStocksInterval = 0
 let updateArchivesTime = 0
-
 let functionCalled = false
-let date = new Date()
-
 let serverUp = false
 let serverRestarted = false
+
+let date = new Date()
 
 let restartServer = async(request, response) => {
     serverUp = true
@@ -256,13 +255,24 @@ let sendToController = (request, response) =>{
     response.redirect('http://localhost:4200/server-details');
 }
 
+let deleteStockFromStocks = async() => {
+    const stock = request.params["symbol"].toUpperCase().split(",")
+    stocksFile.deleteStock(stock)
+    
+}
 
+let addStockToStocks = async() => {
+    const stocks = request.params["symbol"].toUpperCase().split(",")
+    stocksFile.addStock(stock)
+}
 module.exports = {
     updateOptions,
     serverAsleep,
     serverAwake,
     restartServer,
     checkServerStatus,
-    sendToController
+    sendToController,
+    deleteStockFromStocks,
+    addStockToStocks
 }
 
