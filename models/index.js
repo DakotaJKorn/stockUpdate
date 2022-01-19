@@ -4,8 +4,8 @@ const { Sequelize, DataTypes } = require('sequelize')
 // construct the sequelize object using the constructor
 let sequelize = null;
 
-    if (process && process.env.DATABASE_URL) {
-        sequelize = new Sequelize(process.env.DATABASE_URL, {
+    if (process && process.env.DATABASE_URL2) {
+        sequelize = new Sequelize(process.env.DATABASE_URL2, {
             dialectOptions: {
             ssl: {
                 require: true,
