@@ -216,7 +216,7 @@ let updateStockInformationTable = () => {
             input_data.stock_description = stock.stock_description
             input_data.stock_exchange = stock.stock_exchange
 
-            StockTable.create(input_data)
+            StockInfoTable.create(input_data)
         }
 }
 
@@ -265,6 +265,7 @@ let addStockToStocks = async() => {
     const stocks = request.params["symbol"].toUpperCase().split(",")
     stocksFile.addStock(stock)
 }
+
 module.exports = {
     updateOptions,
     serverAsleep,
