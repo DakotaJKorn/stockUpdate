@@ -18,7 +18,7 @@ let serverRestarted = false
 
 let date = new Date()
 
-let restartServer = async(request, response) => {
+let restartServer = async(request, response, next) => {
     serverUp = true
     serverRestarted = true
     
@@ -32,9 +32,12 @@ let restartServer = async(request, response) => {
     
     updateStocks()
 
-    if(request)
-    response.status(200).send("Server restarted!")
-    
+    if(request){
+        response.status(200).send("Server restarted!")
+    }else{
+        next();
+    }
+
 }
 
 let serverAsleep = () => {
