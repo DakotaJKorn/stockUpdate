@@ -24,10 +24,8 @@ let restartServer = async(request, response, next) => {
     serverRestarted = true
     
     await getStockIDandNameFromDB()
-    .then(updateStocks())
-    .catch(error => {
-        console.log(error)
-    }) 
+
+    updateStocks()
 
     response.status(200).send("Server started! DO NOT REFRESH OR CLOSE PAGE")
 }
