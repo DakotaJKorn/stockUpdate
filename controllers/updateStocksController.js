@@ -252,7 +252,7 @@ let checkServerStatus = async(request, response) =>{
 
 let sendToController = (request, response) =>{
     
-    response.redirect('http://localhost:4200/server-details');
+    //response.redirect('http://localhost:4200/server-details');
 }
 
 let deleteStockFromStocks = async() => {
