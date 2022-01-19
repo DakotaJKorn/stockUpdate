@@ -31,7 +31,7 @@ let restartServer = async(request, response) => {
 
     
     updateStocks()
-    //console.log("Server Up!")
+
     if(request)
     response.status(200).send("Server restarted!")
     
@@ -78,6 +78,7 @@ let getStockIDandNameFromDB = async() =>{
 const updateStocks = async () => {
     
     setInterval(() => { 
+            console.log('Once through the interval')
         if(serverUp){
             date = new Date()
             let hour = date.getHours()
