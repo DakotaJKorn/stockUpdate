@@ -10,8 +10,8 @@ const StockCurrentTable = db.Stock_Current
 let updateStockInformation = false
 
 const intervalTime = 1000 * 60
-let updateStocksInterval = 0
-let updateArchivesTime = 0
+let updateStocksInterval = 15
+let updateArchivesTime = 17
 let functionCalled = false
 let serverUp = false
 let serverRestarted = false
@@ -19,28 +19,17 @@ let serverRestarted = false
 let date = new Date()
 
 let restartServer = async(request, response, next) => {
-    response.send('Everything is ok!')
-    /*
+ 
     serverUp = true
     serverRestarted = true
     
-    if(updateStockInformation)
-        await getStockInformation(0)
-    
-    await getStockIDandNameFromDB() 
+    await getStockIDandNameFromDB()
+    .then(updateStocks())
+    .catch(error => {
+        console.log(error)
+    }) 
 
-    //await updateOptions()
-
-    
-    updateStocks()
-
-    if(request){
-        response.status(200).send("Server restarted!")
-    }else{
-        next();
-    }
-    */
-
+    response.status(200).send("Server started! DO NOT REFRESH OR CLOSE PAGE")
 }
 
 let serverAsleep = () => {
