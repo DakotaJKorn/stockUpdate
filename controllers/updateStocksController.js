@@ -76,9 +76,12 @@ let getStockIDandNameFromDB = async() =>{
 
 
 const updateStocks = async () => {
-    
+
+    console.log("made it to this method")
+      /* 
     setInterval(() => { 
             console.log('Once through the interval')
+         
         if(serverUp){
             date = new Date()
             let hour = date.getHours()
@@ -100,6 +103,7 @@ const updateStocks = async () => {
                 functionCalled = false;
         }   
     }, intervalTime);
+    */
 }
 
 let getCurrentPrices = async () => {
