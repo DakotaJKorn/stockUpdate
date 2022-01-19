@@ -7,7 +7,7 @@ const StockArchivesTable = db.Stock_Archives
 const StockInfoTable = db.Stock_Info
 const StockCurrentTable = db.Stock_Current
 
-let updateStockInformation = false
+let updateStockInformation = true
 
 const intervalTime = 1000 * 60
 let updateStocksInterval = 0
@@ -23,15 +23,15 @@ let restartServer = async(request, response) => {
     serverRestarted = true
     
     if(updateStockInformation)
-        getStockInformation(0)
+        await getStockInformation(0)
     
-    await getStockIDandNameFromDB() 
+    //await getStockIDandNameFromDB() 
 
-    await updateOptions()
+    //await updateOptions()
 
     
-    updateStocks()
-    console.log("Server Up!")
+    //updateStocks()
+    //console.log("Server Up!")
     if(request)
     response.status(200).send("Server restarted!")
     
