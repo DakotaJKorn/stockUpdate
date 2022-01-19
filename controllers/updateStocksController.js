@@ -167,7 +167,7 @@ let updateStockCurrentDatabase = async() => {
         input_data.stock_symbol = stock.stock_symbol
         input_data.stock_value = stock.stock_value
         input_data.stockId = stock.stock_id
-        StockCurrentTable.update(input_data, { where: {stock_symbol: stock.stock_symbol}})
+        StockCurrentTable.create(input_data, { where: {stock_symbol: stock.stock_symbol}})
     }
     console.log("Postgres DB Updated!!!")  
 }
