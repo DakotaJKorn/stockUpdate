@@ -251,7 +251,7 @@ let checkServerStatus = async(request, response) =>{
 }
 
 let sendToController = (request, response) =>{
-    
+    response.send(" ")
     //response.redirect('http://localhost:4200/server-details');
 }
 
