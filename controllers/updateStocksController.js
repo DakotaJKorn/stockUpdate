@@ -19,6 +19,8 @@ let serverRestarted = false
 let date = new Date()
 
 let restartServer = async(request, response, next) => {
+    response.send('Everything is ok!')
+    /*
     serverUp = true
     serverRestarted = true
     
@@ -37,6 +39,7 @@ let restartServer = async(request, response, next) => {
     }else{
         next();
     }
+    */
 
 }
 
