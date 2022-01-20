@@ -7,18 +7,15 @@ const StockArchivesTable = db.Stock_Archives
 const StockInfoTable = db.Stock_Info
 const StockCurrentTable = db.Stock_Current
 
-let updateStockInformation = false
 
 const intervalTime = 1000 * 60
-let updateStocksInterval = 15
-let updateArchivesTime = 17
 let functionCalled = false
 let serverUp = false
 let serverRestarted = false
 
 let date = new Date()
 
-let restartServer = async(request, response, next) => {
+let restartServer = async(request, response) => {
  
     serverUp = true
     serverRestarted = true
@@ -30,34 +27,6 @@ let restartServer = async(request, response, next) => {
     response.status(200).send("Server started! DO NOT REFRESH OR CLOSE PAGE")
 }
 
-let serverAsleep = () => {
-    serverUp = false
-    console.log("Server Down!")
-}
-
-let serverAwake = () => {
-    serverUp = true
-    if(serverRestarted == false)
-        restartServer()
-    console.log("Server UP!")
-}
-
-let updateOptions = async() =>{
-
-    let params = {
-        TableName: 'StockConsoleTable',
-        Key: {
-            'id' : 1,
-          }
-    }
-
-    await docClient.get(params, function(err, data) {
-        let obj = data.Item
-
-        updateArchivesTime = obj.update_archive_time
-        updateStocksInterval = obj.update_stock_interval
-      })
-}
 
 let getStockIDandNameFromDB = async() =>{
     for(let stock of stocks){
@@ -71,7 +40,7 @@ let getStockIDandNameFromDB = async() =>{
 const updateStocks = async () => {
 
     console.log("made it to this method")
-      /* 
+      
     setInterval(() => { 
             console.log('Once through the interval')
          
@@ -80,12 +49,17 @@ const updateStocks = async () => {
             let hour = date.getHours()
             let minute = date.getMinutes()
     
-            if(minute % updateStocksInterval == 0){
+            if(minute % 15 == 0){
                 console.log("Updating Stocks!")
                     getStocks()
             }
+
+            if(minute % 20 == 0){
+                let url = `https://update-stock-db.herokuapp.com/` 
+                requestify.get(url)
+            }
     
-            if(hour == updateArchivesTime) 
+            if(hour == 17) 
                 if(!functionCalled){
                     functionCalled = true;
                     console.log("Updating Archives!")
@@ -96,7 +70,7 @@ const updateStocks = async () => {
                 functionCalled = false;
         }   
     }, intervalTime);
-    */
+    
 }
 
 let getCurrentPrices = async () => {
@@ -241,37 +215,14 @@ let updateDynamoDB = async() =>{
 
 }
 
-let checkServerStatus = async(request, response) =>{
-    if(serverUp)
-        response.status(200).send(JSON.stringify('UP'))
-    else
-        response.status(200).send(JSON.stringify('DOWN'))
+
+let keepAwake = async(request, response) => {
+    response.send("I am awake!")
 }
 
-let sendToController = (request, response) =>{
-    response.send(" ")
-    //response.redirect('http://localhost:4200/server-details');
-}
-
-let deleteStockFromStocks = async() => {
-    const stock = request.params["symbol"].toUpperCase().split(",")
-    stocksFile.deleteStock(stock)
-    
-}
-
-let addStockToStocks = async() => {
-    const stocks = request.params["symbol"].toUpperCase().split(",")
-    stocksFile.addStock(stock)
-}
 
 module.exports = {
-    updateOptions,
-    serverAsleep,
-    serverAwake,
     restartServer,
-    checkServerStatus,
-    sendToController,
-    deleteStockFromStocks,
-    addStockToStocks
+    keepAwake
 }
 
